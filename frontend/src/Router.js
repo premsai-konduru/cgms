@@ -20,11 +20,11 @@ const Router = () => {
                     <Route path='login' element={<Login />} />;
                     {/* Private routes */}
                     {/* The below is for the user */}
-                    <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
+                    <Route path='grievance' element={<RequireAuth allowedRoles={[ROLES.User]} />}>
                         <Route path="/" element={<Grievance />} />
                     </Route>
                     {/* The below is for the admin */}
-                    <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+                    <Route path='admin' element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
                         <Route path="/" element={<Admin />} />
                     </Route>
                     {/* catch everything else */}

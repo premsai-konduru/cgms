@@ -22,7 +22,6 @@ const Login = () => {
   const [user, setUser] = useState('');
   const [pwd, setPwd] = useState('');
   const [errMsg, setErrMsg] = useState('');
-  const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -54,10 +53,14 @@ const Login = () => {
       setAuth({ user, pwd, roles, accessToken });
       setUser('');
       setPwd('');
-      setSuccess(true);
 
-      // Move useNavigate inside the try block
-      navigate('/grievance');
+      if (roles === 2001)
+        navigate('/grievance');
+      else if (roles === 5150)
+        navigate('/admin');
+      else
+        navigate('/missing');
+
     } catch (err) {
       if (!err?.response) {
         setErrMsg('No Server Response');
