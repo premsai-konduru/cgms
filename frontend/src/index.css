@@ -1,0 +1,233 @@
+/* Login page css starts */
+.body1 {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.login-container {
+  background: #f0f0f0;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 20px 20px 60px #c7c7c7, -20px -20px 60px #ffffff;
+  width: 800px; /* Adjust width as needed */
+  max-width: 90%; /* To prevent the container from becoming too wide */
+}
+
+.login-button {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 6px 6px 12px #c7c7c7, -6px -6px 12px #ffffff;
+}
+
+.login-button:hover {
+  background-color: #0056b3;
+}
+
+.profile-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #007bff;
+  margin: 0 auto 20px;
+  display: block;
+}
+
+/* Additional styles with increased gaps */
+.form-group {
+  position: relative;
+  margin-bottom: 2rem;
+  /* Increased gap between input fields */
+}
+
+.form-control-container {
+  display: flex;
+  align-items: center;
+}
+
+.body1 .form-control {
+  padding: 1rem 1rem 0.5rem;
+  padding-right: 40px;
+  /* Space for the icon */
+}
+
+.body1 .form-control:focus~.label-float,
+.body1 .form-control:not(:focus):valid~.label-float {
+  top: -1rem;
+  /* Adjusted value for increased gap */
+  font-size: 0.75rem;
+}
+
+.label-float {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: 0.3s ease all;
+}
+
+.password-icon {
+  position: relative;
+}
+
+.login-container {
+  margin-top: 4rem;
+  /* Increased gap above the login container */
+}
+
+.iconInput {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+}
+
+/* login page css ends */
+
+/* grievance page style starts */
+
+body {
+  background-color: #f5f5f5;
+}
+
+.grievance-container {
+  margin: 2rem 0;
+}
+
+.collapsible-button {
+  background-color: #3498db;
+  border: none;
+  padding: 1rem;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+  outline: none;
+  position: relative;
+  color: white;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.collapsible-button i {
+  margin-right: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.collapsible-button.collapsed i {
+  transform: rotate(-90deg);
+}
+
+.collapsible-content {
+  padding: 1rem;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.status-solved {
+  color: green;
+}
+
+.status-unsolved {
+  color: red;
+}
+
+/* Additional styles for the new grievance section */
+.new-grievance {
+  margin-top: 2rem;
+}
+
+.new-grievance {
+  margin-top: 2rem;
+}
+
+#grievance-title {
+  font-size: 1.2rem;
+}
+
+.new-grievance-button {
+  background-color: #3498db;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+
+
+.grievance-options label {
+  display: block;
+}
+
+.grievance-options input[type="radio"] {
+  margin-right: 0.5rem;
+}
+
+.grievance-options select,
+.grievance-options textarea {
+  /* display: none; */
+  margin-top: 1rem;
+}
+
+.grievance-options input[type="radio"]:checked~select,
+.grievance-options input[type="radio"]:checked~textarea {
+  display: block;
+}
+
+/* .grievance-options input[type="radio"]:checked~select~.grievance-options textarea {
+display: none;
+} */
+
+.submit-button {
+  background-color: #3498db;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.grievance-options input[type="radio"]:checked~.submit-button {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.grievance-options {
+  margin-left: 1rem;
+  display: block;
+}
+
+#Bank,
+#ATM {
+  margin-left: 0.5rem;
+}
+
+#branches{
+  width: 40%;
+  margin-bottom: 10px;
+  margin-top: 0px;
+}
+
+#atm-radi{
+  margin-left: 0.8rem;
+}
+
+.describer{
+  width: 65%;
+}
+
+.atm123{
+  margin-left: 1.3rem;
+}
+
+/* grievance style ends */
