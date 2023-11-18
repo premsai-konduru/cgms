@@ -8,6 +8,10 @@ import lockImage from '../images/lock_P.jpg';
 
 import axios from '../api/axios';
 const LOGIN_URL = '/auth';
+export let loginDetails = {
+  userName: null,
+  pwd: null
+};
 
 const Login = () => {
 
@@ -31,6 +35,9 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    loginDetails.userName = user;
+    loginDetails.password = pwd;
 
     try {
       const response = await axios.post(
@@ -68,63 +75,65 @@ const Login = () => {
 
 
   return (
-    <div className='body1'>
-      <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive" style={{ color: "red", backgroundColor: "violet" }}>{errMsg}</p>
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-md-6 col-sm-8 col-lg-4">
-            <div className="login-container p-4">
-              <img src={logoImage} alt="Profile Image" className="profile-image" />
-              <h1 className="text-center mb-4">State Bank Of Blue</h1>
-              <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <div className="form-control-container">
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="username"
-                      ref={userRef}
-                      autoComplete="off"
-                      onChange={(e) => { setUser(e.target.value) }}
-                      value={user}
-                      name="username"
-                      required
-                      maxLength={12}
-                      minLength={12} />
-                    <label className="label-float" htmlFor="username">A/c Number</label>
-                    <img src={userImage} alt="Msg icon" className="iconInput" />
+    <>
+      <div className='body1'>
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-md-6 col-sm-8 col-lg-4">
+              <div className="login-container p-4">
+                <img src={logoImage} alt="Profile Image" className="profile-image" />
+                <h1 className="text-center mb-4">State Bank Of Blue</h1>
+                <form onSubmit={handleSubmit}>
+                  <div className="form-group">
+                    <div className="form-control-container">
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="username"
+                        ref={userRef}
+                        autoComplete="off"
+                        onChange={(e) => { setUser(e.target.value) }}
+                        value={user}
+                        name="username"
+                        required
+                        maxLength={12}
+                        minLength={12} />
+                      <label className="label-float" htmlFor="username">A/c Number</label>
+                      <img src={userImage} alt="Msg icon" className="iconInput" />
+                    </div>
                   </div>
-                </div>
-                <div className="form-group">
-                  <div className="form-control-container">
-                    <input
-                      type="password"
-                      className="form-control password-icon"
-                      id="password"
-                      onChange={(e) => setPwd(e.target.value)}
-                      value={pwd}
-                      name="password"
-                      required />
-                    <label className="label-float" htmlFor="password">
-                      Password
-                    </label>
-                    <img src={lockImage} alt="Lock Icon" className="iconInput" />
+                  <div className="form-group">
+                    <div className="form-control-container">
+                      <input
+                        type="password"
+                        className="form-control password-icon"
+                        id="password"
+                        onChange={(e) => setPwd(e.target.value)}
+                        value={pwd}
+                        name="password"
+                        required />
+                      <label className="label-float" htmlFor="password">
+                        Password
+                      </label>
+                      <img src={lockImage} alt="Lock Icon" className="iconInput" />
+                    </div>
                   </div>
-                </div>
-                <button
-                  className="btn
+                  <button
+                    className="btn
                        btn-primary 
                        btn-block 
                        login-button"
-                  type="submit">
-                  Login
-                </button>
-              </form>
+                    type="submit">
+                    Login
+                  </button>
+                </form>
+                <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive" style={{ color: "red", backgroundColor: "light-blue", textAlign: "center", marginTop: "1rem" }}>{errMsg}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

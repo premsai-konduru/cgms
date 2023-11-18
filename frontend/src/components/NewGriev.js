@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Bank from './Bank';
 import ATM from './ATM';
+import { loginDetails } from './Login';
 
 function NewGriev() {
   const [isNewGrievanceOpen, setNewGrievanceOpen] = useState(false);
@@ -29,12 +30,12 @@ function NewGriev() {
       grievanceType: selectedGrievanceType,
     };
     // Dealing after the button is submitted
-    if(selectedGrievanceType === "Bank"){
+    if (selectedGrievanceType === "Bank") {
       // Deal with the bankValues
-      data = {...data, ...bankValues};
+      data = { ...loginDetails, ...data, ...bankValues };
     } else {
       // Deal with the atmValues
-      data = {...data, ...atmValues};
+      data = { ...loginDetails, ...data, ...atmValues };
     }
     // Close the grievance content after submission
     setNewGrievanceOpen(false);
@@ -87,7 +88,7 @@ function NewGriev() {
 
                 {/* Additional Grievance Details based on selected type */}
                 {selectedGrievanceType === 'Bank' && <Bank onExport={handleBankValuesExport} />}
-                {selectedGrievanceType === 'ATM' && <ATM onExport2={handleATMvaluesExport}/>}
+                {selectedGrievanceType === 'ATM' && <ATM onExport2={handleATMvaluesExport} />}
                 {/* ATM component or other components go here */}
 
                 {/* Submit Button */}
@@ -96,7 +97,7 @@ function NewGriev() {
                     type="submit"
                     className="btn btn-primary submit-button"
                     disabled={!isSubmitButtonEnabled}
-                    style={{ opacity: isSubmitButtonEnabled ? 1 : 0.5, pointerEvents: isSubmitButtonEnabled ? "auto": "none" }}
+                    style={{ opacity: isSubmitButtonEnabled ? 1 : 0.5, pointerEvents: isSubmitButtonEnabled ? "auto" : "none" }}
                   >
                     Submit
                   </button>
