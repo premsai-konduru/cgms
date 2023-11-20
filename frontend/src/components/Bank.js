@@ -51,12 +51,12 @@ function Bank({ onExport }) {
                 </select>
                 {/* Issue Options */}
                 <label id="Issue_b">Choose one:</label>
-                {/* <label><input type="radio" name="bank-issue-type" value="Transfer" checked={selectedIssueType === "Transfer"} onChange={handleIssueTypeChange} /> Transfer</label> */}
-                <label><input type="radio" name="bank-issue-type" value="Transfer" onChange={handleIssueTypeChange} /> Transfer</label>
-                {/* <label><input type="radio" name="bank-issue-type" value="Withdrawal" checked={selectedIssueType === "Withdrawal"} onChange={handleIssueTypeChange} /> Withdrawal</label> */}
-                <label><input type="radio" name="bank-issue-type" value="Withdrawal" onChange={handleIssueTypeChange} /> Withdrawal</label>
-                {/* <label><input type="radio" name="bank-issue-type" value="Others" checked={selectedIssueType === "Others"} onChange={handleIssueTypeChange} /> Others</label> */}
-                <label><input type="radio" name="bank-issue-type" value="Others" onChange={handleIssueTypeChange} /> Others</label>
+                <label><input type="radio" name="bank-issue-type" value="Transfer" checked={selectedIssueType === "Transfer"} onChange={handleIssueTypeChange} /> Transfer</label>
+                {/* <label><input type="radio" name="bank-issue-type" value="Transfer" onChange={handleIssueTypeChange} /> Transfer</label> */}
+                <label><input type="radio" name="bank-issue-type" value="Withdrawal" checked={selectedIssueType === "Withdrawal"} onChange={handleIssueTypeChange} /> Withdrawal</label>
+                {/* <label><input type="radio" name="bank-issue-type" value="Withdrawal" onChange={handleIssueTypeChange} /> Withdrawal</label> */}
+                <label><input type="radio" name="bank-issue-type" value="Others" checked={selectedIssueType === "Others"} onChange={handleIssueTypeChange} /> Others</label>
+                {/* <label><input type="radio" name="bank-issue-type" value="Others" onChange={handleIssueTypeChange} /> Others</label> */}
                 {/* Text area of the Issue */}
                 <label id="Issue_b2">Describe your Issue:</label>
                 <textarea className="form-control describer" value={issueDescription} onChange={handleIssueDescriptionChange} placeholder="Describe your issue"></textarea>

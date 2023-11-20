@@ -8,6 +8,7 @@ import lockImage from '../images/lock_P.jpg';
 
 import axios from '../api/axios';
 const LOGIN_URL = '/auth';
+
 export let loginDetails = {
   userName: null,
   pwd: null
@@ -30,6 +31,8 @@ const Login = () => {
 
   useEffect(() => {
     setErrMsg('');
+    // topuser = user;
+    // toppwd = pwd;
   }, [user, pwd]);
 
   const handleSubmit = async (e) => {
@@ -54,15 +57,22 @@ const Login = () => {
       setUser('');
       setPwd('');
 
-      if (roles === 2001)
+      if (roles.includes(2001)) {
+        console.log("Navigating to grievance page");
         navigate('/grievance');
-      else if (roles === 5150)
+      }
+      else if (roles.includes(5150)) {
+        console.log("Going to admin");
         navigate('/admin');
-      else
+      }
+      else {
+        console.log("In else statement");
         navigate('/missing');
+      }
 
     } catch (err) {
       if (!err?.response) {
+        console.log(err);
         setErrMsg('No Server Response');
       } else if (err.response?.status === 400) {
         setErrMsg('Missing Username or Password');
@@ -84,6 +94,7 @@ const Login = () => {
           <div className="row justify-content-center">
             <div className="col-md-6 col-sm-8 col-lg-4">
               <div className="login-container p-4">
+                {/* eslint-disable-next-line */}
                 <img src={logoImage} alt="Profile Image" className="profile-image" />
                 <h1 className="text-center mb-4">State Bank Of Blue</h1>
                 <form onSubmit={handleSubmit}>

@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import Bank from './Bank';
 import ATM from './ATM';
 import { loginDetails } from './Login';
+import axios from '../api/axios';
+
+const grievanceUrl = '/grievance';
 
 function NewGriev() {
   const [isNewGrievanceOpen, setNewGrievanceOpen] = useState(false);
@@ -21,9 +24,24 @@ function NewGriev() {
     setAtmValues(values);
   }
 
-  const isSubmitButtonEnabled = selectedGrievanceType === 'Bank' || selectedGrievanceType === 'ATM';
+  const isSubmitButtonEnabled = () => {
+    if (selectedGrievanceType === "Bank" && bankValues) {
+      for (const element of bankValues) {
+        if (element === undefined) return false;
+      }
+      return true;
+    }
+    if (selectedGrievanceType === "ATM" && atmValues) {
+      for (const element of atmValues) {
+        if (element === undefined) return false;
+      }
+      return true;
+    }
+    return false; // Return false for other cases or when arrays are not defined
+  };
 
-  const handleGrievanceSubmit = (event) => {
+
+  const handleGrievanceSubmit = async (event) => {
     event.preventDefault();
 
     let data = {
@@ -32,11 +50,30 @@ function NewGriev() {
     // Dealing after the button is submitted
     if (selectedGrievanceType === "Bank") {
       // Deal with the bankValues
-      data = { ...loginDetails, ...data, ...bankValues };
+      data = { ...loginDetails, issue: { ...data, ...bankValues } };
     } else {
       // Deal with the atmValues
-      data = { ...loginDetails, ...data, ...atmValues };
+      data = { ...loginDetails, issue: { ...data, ...atmValues } };
     }
+
+    const response = await axios.post(
+      grievanceUrl,
+      JSON.stringify(data),
+      {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true,
+      }
+    );
+    if (response) {
+      if (response.status === 200)
+        alert("Grievance submitted successfully");
+      else
+        alert(response?.error);
+    }
+    else{
+      alert("No response from the server");
+    }
+
     // Close the grievance content after submission
     setNewGrievanceOpen(false);
   };
