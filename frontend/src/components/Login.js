@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
 import logoImage from '../images/logo_.jpg';
@@ -17,6 +17,8 @@ export let loginDetails = {
 const Login = () => {
 
   const { setAuth } = useAuth();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const userRef = useRef();
   const errRef = useRef();
 
@@ -38,15 +40,18 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    loginDetails.userName = user;
-    loginDetails.password = pwd;
+    loginDetails.user = user;
+    loginDetails.pwd = pwd;
 
     try {
       const response = await axios.post(
         LOGIN_URL,
         JSON.stringify({ user, pwd }),
         {
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            // 'Authorization': `Bearer ${jwtCookie}`, // Include the JWT in the Authorization header
+          },      
           withCredentials: true,
         }
       );
@@ -54,21 +59,24 @@ const Login = () => {
       const accessToken = response?.data?.accessToken;
       const roles = response?.data?.roles;
       setAuth({ user, pwd, roles, accessToken });
+      console.log(response)
       setUser('');
       setPwd('');
-
-      if (roles.includes(2001)) {
-        console.log("Navigating to grievance page");
-        navigate('/grievance');
-      }
-      else if (roles.includes(5150)) {
-        console.log("Going to admin");
-        navigate('/admin');
-      }
-      else {
-        console.log("In else statement");
-        navigate('/missing');
-      }
+      console.log("submitted form");
+      // if (roles.includes(2001)) {
+      //   console.log("Navigating to grievance page");
+      //   navigate('/grievance');
+      // }
+      // else if (roles.includes(5150)) {
+      //   console.log("Going to admin");
+      //   navigate('/admin');
+      // }
+      // else {
+      //   console.log("In else statement");
+      //   navigate('/missing');
+      // }
+      navigate(from, {replace:true})
+      console.log("after submit");
 
     } catch (err) {
       if (!err?.response) {

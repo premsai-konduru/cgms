@@ -40,11 +40,11 @@ const handleLogin = async (req, res) => {
             console.log(roles);
 
             // Creates Secure Cookie with refresh token
-            res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
+            res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
             // res.sendStatus(200);
 
             // Send authorization roles and access token to user
-            return res.status(200).json({ roles, accessToken });
+            res.status(200).json({ roles, accessToken });
 
         } else {
             console.log("Password not matched");

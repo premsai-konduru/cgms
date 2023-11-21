@@ -30,7 +30,7 @@ function Machine({ machineDetails }) {
 
             <div className="atm123">
                 <label className="grievance-title">Select location code:</label>
-                <select className="form-control" name="location-code" style={{ width: "fit-content" }} value={location} onChange={handleLocationChange}>
+                <select className="form-control" name="location-code" value={location} style={{ width: "fit-content" }} onChange={handleLocationChange}>
                     <option value="0">Select Location</option>
                     <option value="code1">Location Code 1</option>
                     <option value="code2">Location Code 2</option>

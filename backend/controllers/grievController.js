@@ -2,12 +2,13 @@ const User = require('../model/User');
 const { ObjectId } = require('mongodb');
 
 const createIssue = async (req, res) => {
+    console.log("Trying")
     const { data } = req.body;
+    console.log(data);
     const user = data.user;
-
     try {
         const foundUser = await User.findOne({ username: user }).exec();
-
+        console.log("Here in the grievController");
         if (!foundUser) {
             // User not found
             return res.status(400).json({ error: "User not found" });
@@ -22,7 +23,7 @@ const createIssue = async (req, res) => {
         issue = { issueId: new ObjectId(), username: user, ...issue };
         foundUser.unsolvedIssues.push(issue);
         await foundUser.save();
-
+        
         return res.status(200).json({ success: "Successfully submitted" });
     } catch (error) {
         console.error("Error creating issue:", error.message);

@@ -3,10 +3,12 @@ import Bank from './Bank';
 import ATM from './ATM';
 import { loginDetails } from './Login';
 import axios from '../api/axios';
+import useAuth from '../hooks/useAuth';
 
-const grievanceUrl = '/grievance';
+const grievanceUrl = '/griev';
 
 function NewGriev() {
+  const auth = useAuth();
   const [isNewGrievanceOpen, setNewGrievanceOpen] = useState(false);
   const [selectedGrievanceType, setSelectedGrievanceType] = useState(null);
   const [bankValues, setBankValues] = useState(null);
@@ -56,13 +58,18 @@ function NewGriev() {
       data = { ...loginDetails, issue: { ...data, ...atmValues } };
     }
 
+    console.log(data);
+
     const response = await axios.post(
       grievanceUrl,
       JSON.stringify(data),
       {
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          "Authorization" : `Bearer ${auth?.accessToken}`,
+          'Content-Type': 'application/json'
+        },
         withCredentials: true,
-      }
+      },
     );
     if (response) {
       if (response.status === 200)
@@ -70,7 +77,7 @@ function NewGriev() {
       else
         alert(response?.error);
     }
-    else{
+    else {
       alert("No response from the server");
     }
 
