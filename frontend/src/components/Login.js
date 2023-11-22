@@ -9,10 +9,10 @@ import lockImage from '../images/lock_P.jpg';
 import axios from '../api/axios';
 const LOGIN_URL = '/auth';
 
-export let loginDetails = {
-  userName: null,
-  pwd: null
-};
+// export let loginDetails = {
+//   userName: null,
+//   pwd: null
+// };
 
 const Login = () => {
 
@@ -40,8 +40,8 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    loginDetails.user = user;
-    loginDetails.pwd = pwd;
+    // loginDetails.user = user;
+    // loginDetails.pwd = pwd;
 
     try {
       const response = await axios.post(

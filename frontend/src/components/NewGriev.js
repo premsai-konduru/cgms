@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Bank from './Bank';
 import ATM from './ATM';
-import { loginDetails } from './Login';
+// import { loginDetails } from './Login';
 import axios from '../api/axios';
 import useAuth from '../hooks/useAuth';
 
@@ -52,10 +52,10 @@ function NewGriev() {
     // Dealing after the button is submitted
     if (selectedGrievanceType === "Bank") {
       // Deal with the bankValues
-      data = { ...loginDetails, issue: { ...data, ...bankValues } };
+      data = { userName: auth?.user, pwd: auth?.pwd, issue: { ...data, ...bankValues } };
     } else {
       // Deal with the atmValues
-      data = { ...loginDetails, issue: { ...data, ...atmValues } };
+      data = { userName: auth?.user, pwd: auth?.pwd, issue: { ...data, ...atmValues } };
     }
 
     console.log(data);
@@ -65,7 +65,7 @@ function NewGriev() {
       JSON.stringify(data),
       {
         headers: {
-          "Authorization" : `Bearer ${auth?.accessToken}`,
+          "Authorization": `Bearer ${auth?.accessToken}`,
           'Content-Type': 'application/json'
         },
         withCredentials: true,
