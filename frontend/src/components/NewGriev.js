@@ -8,7 +8,7 @@ import useAuth from '../hooks/useAuth';
 const grievanceUrl = '/griev';
 
 function NewGriev() {
-  const auth = useAuth();
+  const { auth } = useAuth();
   const [isNewGrievanceOpen, setNewGrievanceOpen] = useState(false);
   const [selectedGrievanceType, setSelectedGrievanceType] = useState(null);
   const [bankValues, setBankValues] = useState(null);
@@ -52,14 +52,14 @@ function NewGriev() {
     // Dealing after the button is submitted
     if (selectedGrievanceType === "Bank") {
       // Deal with the bankValues
-      data = { userName: auth?.user, pwd: auth?.pwd, issue: { ...data, ...bankValues } };
+      data = { user: auth?.user, pwd: auth?.pwd, issue: { ...data, ...bankValues } };
     } else {
       // Deal with the atmValues
-      data = { userName: auth?.user, pwd: auth?.pwd, issue: { ...data, ...atmValues } };
+      data = { user: auth?.user, pwd: auth?.pwd, issue: { ...data, ...atmValues } };
     }
 
-    console.log(data);
-
+    // console.log(data);
+    console.log(auth);
     const response = await axios.post(
       grievanceUrl,
       JSON.stringify(data),

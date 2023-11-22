@@ -15,17 +15,23 @@ const Home = () => {
 
     return (
         <div className="container">
-            <h1>Home</h1>
-            <br />
-            <p>You are logged in!</p>
-            <br/>
-            <Link to="/grievance">Go to the Grievance page</Link>
-            <br />
-            <Link to="/admin">Go to the Admin page</Link>
-            <br />
-            <Link to="/linkpage">Go to the link page</Link>
-            <div className="btn btn-primary">
-                <button onClick={logout}>Sign Out</button>
+            <div className="row justify-content-center">
+                <div className="col-md-6 col-sm-8 col-lg-4">
+                    <div className="login-container p-4">
+                        <h1>Home</h1>
+                        <br />
+                        <p>You are logged in!</p>
+                        <br />
+                        <Link to="/grievance">Go to the Grievance page</Link>
+                        <br />
+                        <Link to="/admin">Go to the Admin page</Link>
+                        <br />
+                        <Link to="/linkpage">Go to the link page</Link>
+                        <br />
+                        <br />
+                        <button type="button" className="btn btn-info" onClick={logout}>Sign Out</button>
+                    </div>
+                </div>
             </div>
         </div>
     )
