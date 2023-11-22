@@ -5,6 +5,8 @@ import Login from './components/Login';
 import Grievance from './components/Grievance';
 import Admin from './components/Admin';
 import Missing from './components/Missing';
+import Unauthorized from './components/Unauthorized';
+import Home from './components/Home';
 // import Unauthorized from './components/Unauthorized';
 
 const ROLES = {
@@ -46,10 +48,12 @@ const Router = () => {
                 {/* <Route path='' element={<Login />} /> */}
                 {/* Public route */}
                 <Route path='login' element={<Login />} />
+                <Route path='unauthorized' element={<Unauthorized />} />
                 {/* Private routes */}
                 {/* The below is for the user */}
                 <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
-                    <Route path="grievance" element={<Grievance />} />
+                    <Route path="/" element={<Home />} />
+                    <Route path='grievance' element={<Grievance />} />
                 </Route>
                 {/* The below is for the admin */}
                 <Route path='' element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
