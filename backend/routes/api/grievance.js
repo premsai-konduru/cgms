@@ -8,7 +8,7 @@ console.log("griev route")
 
 if (verifyRoles(ROLES_LIST.User)) {
     // console.log("Verifed Roles");
-    router.post(grievController.createIssue);
+    router.post('/', grievController.createIssue);
     // console.log("Below")
 }
 else

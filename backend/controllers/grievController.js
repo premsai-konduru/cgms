@@ -3,8 +3,7 @@ const { ObjectId } = require('mongodb');
 
 const createIssue = async (req, res) => {
     console.log("Trying")
-    const { data } = req.body;
-    console.log(data);
+    const data = req.body;
     const user = data.user;
     try {
         const foundUser = await User.findOne({ username: user }).exec();
