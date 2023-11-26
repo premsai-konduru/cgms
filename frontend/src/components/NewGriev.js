@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import Bank from './Bank';
 import ATM from './ATM';
-// import { loginDetails } from './Login';
 import axios from '../api/axios';
 import useAuth from '../hooks/useAuth';
+import useGriev from '../hooks/useGriev';
 
-const grievanceUrl = '/griev';
+const grievanceUrl = '/grievance';
 
 function NewGriev() {
   const { auth } = useAuth();
+  const { setGrievance } = useGriev();
   const [isNewGrievanceOpen, setNewGrievanceOpen] = useState(false);
   const [selectedGrievanceType, setSelectedGrievanceType] = useState(null);
   const [bankValues, setBankValues] = useState(null);
   const [atmValues, setAtmValues] = useState(null);
+  const [SubmittedStatus, setSubmittedStatus] = useState(false);
 
   const handleGrievanceTypeChange = (event) => {
     setSelectedGrievanceType(event.target.value);
@@ -58,27 +60,38 @@ function NewGriev() {
       data = { user: auth?.user, pwd: auth?.pwd, issue: { ...data, ...atmValues } };
     }
 
-    // console.log(data);
-    console.log(auth);
-    const response = await axios.post(
-      grievanceUrl,
-      JSON.stringify(data),
-      {
-        headers: {
-          "Authorization": `Bearer ${auth?.accessToken}`,
-          'Content-Type': 'application/json'
+    console.log(data);
+    //console.log(auth);
+    try {
+      await axios.post(
+        grievanceUrl,
+        JSON.stringify(data),
+        {
+          headers: {
+            "Authorization": `Bearer ${auth?.accessToken}`,
+            'Content-Type': 'application/json'
+          },
+          withCredentials: true,
         },
-        withCredentials: true,
-      },
-    );
-    if (response) {
-      if (response.status === 200)
-        alert("Grievance submitted successfully");
-      else
-        alert(response?.error);
+      );
+      // Set the state to trigger the useEffect in Unsolved component
+      setSubmittedStatus(true);
+      // Use the status again to the Global Context Provider
+      setGrievance({SubmittedStatus});
+      // After successfully changing the global variable, make the SubmittedStatus false
+      setSubmittedStatus(false);
     }
-    else {
-      alert("No response from the server");
+    catch (err) {
+      // Handle errors
+      if (!err?.response) {
+        alert("No response from the server");
+      } else if (err?.response.status === 400) {
+        alert("Missing some data");
+      } else if (err?.response.status === 403) {
+        alert("You are forbidden");
+      } else {
+        alert(err.message);
+      }
     }
 
     // Close the grievance content after submission

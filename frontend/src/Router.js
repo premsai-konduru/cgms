@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import RequireAuth from './components/RequireAuth';
 import Login from './components/Login';
 import Grievance from './components/Grievance';
@@ -16,7 +16,7 @@ const ROLES = {
 
 // Router.js
 const Router = () => {
-    console.log("Router rendered");
+    //console.log("Router rendered");
     return (
         // <BrowserRouter>
         // <Routes>

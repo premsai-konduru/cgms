@@ -4,12 +4,15 @@ const grievController = require('../../controllers/grievController');
 const ROLES_LIST = require('../../config/roles_list');
 const verifyRoles = require('../../middleware/verifyRoles');
 
-console.log("griev route")
+//console.log("griev route")
 
 if (verifyRoles(ROLES_LIST.User)) {
-    // console.log("Verifed Roles");
-    router.post('/', grievController.createIssue);
-    // console.log("Below")
+    // //console.log("Verifed Roles");
+    router.route('/')
+        .get(grievController.getAllIssues)
+        .delete(grievController.deleteIssue)
+        .post(grievController.createIssue);
+    // //console.log("Below")
 }
 else
     console.log("could not verify");

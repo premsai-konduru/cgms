@@ -9,7 +9,7 @@ const handleLogin = async (req, res) => {
     try {
         const foundUser = await User.findOne({ username: user }).exec();
         if (!foundUser) {
-            console.log("user not found");
+            //console.log("user not found");
             return res.sendStatus(401);
         } //Unauthorized 
         // evaluate password 
@@ -36,8 +36,8 @@ const handleLogin = async (req, res) => {
             // Saving refreshToken with current user
             foundUser.refreshToken = refreshToken;
             const result = await foundUser.save();
-            console.log(result);
-            console.log(roles);
+            //console.log(result);
+            //console.log(roles);
 
             // Creates Secure Cookie with refresh token
             res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
@@ -47,7 +47,7 @@ const handleLogin = async (req, res) => {
             res.status(200).json({ roles, accessToken });
 
         } else {
-            console.log("Password not matched");
+            //console.log("Password not matched");
             res.sendStatus(401);
         }
     } catch (error) {

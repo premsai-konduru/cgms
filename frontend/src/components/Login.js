@@ -59,29 +59,29 @@ const Login = () => {
       const accessToken = response?.data?.accessToken;
       const roles = response?.data?.roles;
       setAuth({ user, pwd, roles, accessToken });
-      console.log(accessToken)
-      console.log(response)
+      //console.log(accessToken)
+      //console.log(response)
       setUser('');
       setPwd('');
-      console.log("submitted form");
+      //console.log("submitted form");
       // if (roles.includes(2001)) {
-      //   console.log("Navigating to grievance page");
+      //   //console.log("Navigating to grievance page");
       //   navigate('/grievance');
       // }
       // else if (roles.includes(5150)) {
-      //   console.log("Going to admin");
+      //   //console.log("Going to admin");
       //   navigate('/admin');
       // }
       // else {
-      //   console.log("In else statement");
+      //   //console.log("In else statement");
       //   navigate('/missing');
       // }
       navigate(from, {replace:true})
-      console.log("after submit");
+      //console.log("after submit");
 
     } catch (err) {
       if (!err?.response) {
-        console.log(err);
+        //console.log(err);
         setErrMsg('No Server Response');
       } else if (err.response?.status === 400) {
         setErrMsg('Missing Username or Password');

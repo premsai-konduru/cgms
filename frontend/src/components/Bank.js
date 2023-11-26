@@ -22,7 +22,7 @@ function Bank({ onExport }) {
     };
 
     useEffect(() => {
-        // console.log(selectedBranch, selectedIssueType, issueDescription)
+        // //console.log(selectedBranch, selectedIssueType, issueDescription)
         exportBank();
     },[selectedBranch, selectedIssueType, issueDescription]);
     // Automatically export values when onExport prop is available

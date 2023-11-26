@@ -30,8 +30,8 @@ import useAuth from "../hooks/useAuth";
 const RequireAuth = ({ allowedRoles }) => {
     const { auth } = useAuth();
     const location = useLocation();
-    console.log("Allowed roles = ",allowedRoles);
-    console.log("auth.roles = ",auth.roles);
+    //console.log("Allowed roles = ",allowedRoles);
+    //console.log("auth.roles = ",auth.roles);
     let exists = false;
     if(auth?.roles){
         allowedRoles.forEach(role => {

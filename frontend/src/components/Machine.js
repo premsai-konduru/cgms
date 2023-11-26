@@ -41,6 +41,7 @@ function Machine({ machineDetails }) {
                 <div style={{ marginTop: "1rem" }}>
                     <label className="grievance-title">Describe the issue at the location:</label>
                     <textarea className="form-control" name="location-issue-description"
+                        value={issueDescription}
                         placeholder="Describe the issue at the location" style={{ width: "fit-content" }}
                         onChange={(event) => setIssueDescription(event.target.value)}
                     >

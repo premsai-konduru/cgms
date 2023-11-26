@@ -1,16 +1,18 @@
 const jwt = require('jsonwebtoken');
 
 const verifyJWT = (req, res, next) => {
-    // console.log(req.headers);
+    // //console.log(req.headers);
     const authHeader = req.headers.authorization || req.headers.Authorization;
-    console.log(authHeader);
-    // console.log(req.cookies);
+    //console.log(authHeader);
+    // //console.log(req.cookies);
     if (!authHeader?.startsWith('Bearer ')) {
         console.log("Here not verified jwt");
+        console.log(req.headers);
+        console.log(authHeader);
         return res.sendStatus(401);
     }
     const token = authHeader.split(' ')[1];
-    console.log(token)
+    //console.log(token)
     // const token = req.cookies.jwt;
     // if (
     jwt.verify(
@@ -18,7 +20,7 @@ const verifyJWT = (req, res, next) => {
         process.env.ACCESS_TOKEN_SECRET,
         (err, decoded) => {
             if (err) {
-                console.log("Could not verify jwt");
+                //console.log("Could not verify jwt");
                 console.log(err.message);
                 return res.sendStatus(403);
             }//invalid token
@@ -27,7 +29,7 @@ const verifyJWT = (req, res, next) => {
             next();
         }
     )
-    //) console.log("verified");
+    //) //console.log("verified");
 
 }
 
