@@ -12,9 +12,6 @@ const Unsolved = () => {
 
   console.log(grievance);
 
-  const accessToken = auth?.accessToken;
-  const user = auth?.user;
-  const pwd = auth?.pwd;
   const grievCode = 0;
 
   useEffect(() => {
@@ -31,10 +28,11 @@ const Unsolved = () => {
           withCredentials: true,
         };
 
+        const user = auth?.user;
+        const pwd = auth?.pwd;
+
         const response = await axios.get(GRIEVANCE_URL, JSON.stringify({ user, pwd, grievCode }), config);
 
-        console.log("fetched")
-        console.log(axios.headers);
         setIssues(response?.data?.issues);
       } catch (err) {
         // Handle errors

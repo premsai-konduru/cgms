@@ -27,8 +27,7 @@ app.use(credentials);
 app.use(cors(corsOptions));
 
 // built-in middleware to handle urlencoded form data
-// extended:false means express is using qs i.e., it handles only key, value pairs
-// if set to true express uses 'queryString' which can handle all types of data
+// extended:false means express is using querystring library and if true, qs library is used
 app.use(express.urlencoded({ extended: false }));
 
 // built-in middleware for json 
