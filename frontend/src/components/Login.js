@@ -51,7 +51,7 @@ const Login = () => {
           headers: {
             'Content-Type': 'application/json',
             // 'Authorization': `Bearer ${jwtCookie}`, // Include the JWT in the Authorization header
-          },      
+          },
           withCredentials: true,
         }
       );
@@ -76,7 +76,7 @@ const Login = () => {
       //   //console.log("In else statement");
       //   navigate('/missing');
       // }
-      navigate(from, {replace:true})
+      navigate(from, { replace: true })
       //console.log("after submit");
 
     } catch (err) {
@@ -143,9 +143,9 @@ const Login = () => {
                   </div>
                   <button
                     className="btn
-                       btn-primary 
-                       btn-block 
-                       login-button"
+                      btn-primary 
+                      btn-block 
+                      login-button"
                     type="submit">
                     Login
                   </button>

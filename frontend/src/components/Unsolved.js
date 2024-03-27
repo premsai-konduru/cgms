@@ -1,25 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from '../api/axios';
-import useGriev from '../hooks/useGriev';
 import useAuth from '../hooks/useAuth';
 
 const GRIEVANCE_URL = '/grievance';
 
 const Unsolved = () => {
-  const [issues, setIssues] = useState(null);
-  const { grievance } = useGriev();
   const { auth } = useAuth();
-
-  console.log(grievance);
-
-  const grievCode = 0;
+  const [issues, setIssues] = useState(null);
+  const [openIssues, setOpenIssues] = useState({}); // State to manage open issues
 
   useEffect(() => {
     console.log("Fetching Unsolved Issues");
     const fetchUnsolvedIssues = async () => {
       try {
-        console.log(axios.defaults.headers);
-
         const config = {
           headers: {
             "Authorization": `Bearer ${auth?.accessToken}`,
@@ -30,8 +23,9 @@ const Unsolved = () => {
 
         const user = auth?.user;
         const pwd = auth?.pwd;
+        const grievCode = 0;
 
-        const response = await axios.get(GRIEVANCE_URL, JSON.stringify({ user, pwd, grievCode }), config);
+        const response = await axios.post(GRIEVANCE_URL, JSON.stringify({ user, pwd, grievCode }), config);
 
         setIssues(response?.data?.issues);
       } catch (err) {
@@ -50,11 +44,13 @@ const Unsolved = () => {
 
     fetchUnsolvedIssues();
 
-  }, [grievance?.SubmittedStatus, accessToken]);
+  }, [auth?.accessToken]);
 
-  const handleIssueClick = (issue) => {
-    // Handle the click for each issue
-    console.log("Clicked on issue:", issue);
+  const toggleIssueContent = (issueId) => {
+    setOpenIssues(prevOpenIssues => ({
+      ...prevOpenIssues,
+      [issueId]: !prevOpenIssues[issueId]
+    }));
   };
 
   return (
@@ -64,10 +60,17 @@ const Unsolved = () => {
           <div key={issue.issueId}>
             <button
               className="collapsible-button btn btn-primary"
-              onClick={() => handleIssueClick(issue)}
+              onClick={() => toggleIssueContent(issue.issueId)}
             >
-              {issue.grievanceType}
+              {openIssues[issue.issueId] ? '▲' : '▼'} {/* Arrow button */}
+              <span style={{paddingLeft:"1rem"}}>{issue.grievanceType}</span>
             </button>
+            {/* Issue content */}
+            {openIssues[issue.issueId] && (
+              <div className="collapsible-content">
+                <p>Issue Details: {issue.details}</p>
+              </div>
+            )}
           </div>
         ))}
     </div>
