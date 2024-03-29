@@ -5,7 +5,7 @@ import axios from '../api/axios';
 import useAuth from '../hooks/useAuth';
 import useGriev from '../hooks/useGriev';
 
-const grievanceUrl = '/grievance';
+const grievanceUrl = '/grievance/issue';
 
 function NewGriev() {
   const { auth } = useAuth();
